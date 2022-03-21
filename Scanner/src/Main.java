@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         Fuzz fuzz = new Fuzz();
-        fuzz.dirScan("vk.com");
+        fuzz.dirScan("google.com");
 
         //HttpPost httpPost = new HttpPost(yandexSite);
         //httpPost.setHeader("qwe", "qwe");
