@@ -6,18 +6,16 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 
-public class Fuzz {
+public class Fuzz extends Thread{
     Scanner console = new Scanner(System.in);
 
     void dirScan(String url) throws IOException {
         //---------Getting url and path to wordlist---------
-        String Url;
+        String Url = url;
         System.out.println("input path to your wordlist");
         String wordlist = console.nextLine();
         File file = new File(wordlist);
@@ -25,26 +23,22 @@ public class Fuzz {
             System.out.println(file.getName()+" not a file");
             return;
         }
-        FileInputStream input = new FileInputStream(file);
+        //создаем объект FileReader для объекта File
+        FileReader fr = new FileReader(file);
+        //создаем BufferedReader с существующего FileReader для построчного считывания
+        BufferedReader reader = new BufferedReader(fr);
 
-        //HttpClient httpClient = HttpClients.createDefault();
-        HttpClient httpClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
-        //HttpGet httpGet = new HttpGet(Url);
-        //HttpResponse httpResponse = httpClient.execute(httpGet);
-        //String response = String.valueOf(httpResponse.getStatusLine());
-        //System.out.println(response);
+        HttpRequest request = new HttpRequest(url);
+
+
         //if (response.equals("HTTP/1.1 200 OK")){
         //    System.out.println("OK!");
         //}
 
-        int i = -1;
-        while((i=input.read())!=-1){
-            Url = "http://"+url+"/"+(char)i;
-            System.out.println(Url);
-            //HttpGet httpGet = new HttpGet(Url);
-            //HttpResponse httpResponse = httpClient.execute(httpGet);
-            //String response = String.valueOf(httpResponse.getStatusLine());
-            //System.out.println(response);
+        String line = "";
+        while((line = reader.readLine()) != null){
+            request.directory = "/" + line;
+            request.run();
         }
     }
 }
