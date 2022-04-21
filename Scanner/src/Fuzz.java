@@ -12,10 +12,38 @@ import java.util.Scanner;
 
 public class Fuzz extends Thread{
     Scanner console = new Scanner(System.in);
+    String Url;
+    String mode;
+    String wordlistPath;
+    File wordlistFile;
+    //создаем объект FileReader для объекта File
+    FileReader fr;
+    //создаем BufferedReader с существующего FileReader для построчного считывания
+    BufferedReader reader;
 
-    void dirScan(String url) throws IOException {
+    void settings(String url) throws IOException {
+        System.out.println("Выберите режим сканирования:\ndir\nsubdomain\ndomains");
+        mode = console.nextLine();
+        if (!(mode.equals("dir")) && !(mode.equals("subdomain")) && !(mode.equals("domains"))){
+            System.out.println("Выбран несуществующий режим");
+            return;
+        }
+        this.Url = url;
+        System.out.println("input path to your wordlist");
+        this.wordlistPath = console.nextLine();
+        this.wordlistFile = new File(wordlistPath);
+        if (!wordlistFile.isFile()){
+            System.out.println(wordlistFile.getName()+" not a file");
+            return;
+        }
+        fr = new FileReader(wordlistFile);
+        reader = new BufferedReader(fr);
+
+    }
+
+    public void dirScan() {
         //---------Getting url and path to wordlist---------
-        String Url = url;
+       /* String Url = url;
         System.out.println("input path to your wordlist");
         String wordlist = console.nextLine();
         File file = new File(wordlist);
@@ -23,12 +51,16 @@ public class Fuzz extends Thread{
             System.out.println(file.getName()+" not a file");
             return;
         }
-        //создаем объект FileReader для объекта File
-        FileReader fr = new FileReader(file);
-        //создаем BufferedReader с существующего FileReader для построчного считывания
-        BufferedReader reader = new BufferedReader(fr);
 
-        HttpRequest request = new HttpRequest(url);
+        fr = new FileReader(file);
+        reader = new BufferedReader(fr);*/
+
+        HttpRequest request = null;
+        try {
+            request = new HttpRequest(Url);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
 
         //if (response.equals("HTTP/1.1 200 OK")){
@@ -36,9 +68,34 @@ public class Fuzz extends Thread{
         //}
 
         String line = "";
-        while((line = reader.readLine()) != null){
+        while(true){
+            try {
+                if (!((line = reader.readLine()) != null)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             request.directory = "/" + line;
-            request.run();
+            request.dir();
+        }
+    }
+
+    void subdomainScan(){
+        HttpRequest request = null;
+        try {
+            request = new HttpRequest(Url);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String line = "";
+        while(true){
+            try {
+                if (!((line = reader.readLine()) != null)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            request.subDomain = line + ".";
+            request.sub();
         }
     }
 }
