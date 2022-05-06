@@ -6,19 +6,29 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        /*HttpRequest request = new HttpRequest("vk.com");
-        request.directory = "";
-        request.dir();*/
         Fuzz fuzz = new Fuzz();
-        fuzz.settings("yandex.ru");
-        if (fuzz.mode.equals("dir")) {
-            fuzz.dirScan();
-        } else if (fuzz.mode.equals("subdomain")) {
-            fuzz.subdomainScan();
+        CommonScan common = new CommonScan("localhost:8080");
+        Scanner console = new Scanner(System.in);
+
+        System.out.println("Choose mode: fuzz, common");
+        String mode = console.nextLine();
+
+        if (mode.equals("fuzz")) {
+            fuzz.settings("localhost:8080");
+            if (fuzz.mode.equals("dir")) {
+                fuzz.dirScan();
+            } else if (fuzz.mode.equals("subdomain")) {
+                fuzz.subdomainScan();
+            }
+        } else if (mode.equals("common")) {
+            common.commonScan();
         }
+
+
         //HttpPost httpPost = new HttpPost(yandexSite);
         //httpPost.setHeader("qwe", "qwe");
         //httpResponse = httpClient.execute(httpPost);

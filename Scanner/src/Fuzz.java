@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.Scanner;
 
 
-public class Fuzz extends Thread{
+public class Fuzz {
     Scanner console = new Scanner(System.in);
     String Url;
     String mode;
@@ -22,9 +22,9 @@ public class Fuzz extends Thread{
     BufferedReader reader;
 
     void settings(String url) throws IOException {
-        System.out.println("Выберите режим сканирования:\ndir\nsubdomain\ndomains");
+        System.out.println("Выберите режим сканирования:\ndir\nsubdomain");
         mode = console.nextLine();
-        if (!(mode.equals("dir")) && !(mode.equals("subdomain")) && !(mode.equals("domains"))){
+        if (!(mode.equals("dir")) && !(mode.equals("subdomain"))){
             System.out.println("Выбран несуществующий режим");
             return;
         }
@@ -41,26 +41,10 @@ public class Fuzz extends Thread{
 
     }
 
-    public void dirScan() {
+    public void dirScan() throws IOException {
         //---------Getting url and path to wordlist---------
-       /* String Url = url;
-        System.out.println("input path to your wordlist");
-        String wordlist = console.nextLine();
-        File file = new File(wordlist);
-        if (!file.isFile()){
-            System.out.println(file.getName()+" not a file");
-            return;
-        }
 
-        fr = new FileReader(file);
-        reader = new BufferedReader(fr);*/
-
-        HttpRequest request = null;
-        try {
-            request = new HttpRequest(Url);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        HttpRequest request = new HttpRequest(Url);
 
 
         //if (response.equals("HTTP/1.1 200 OK")){
@@ -70,7 +54,7 @@ public class Fuzz extends Thread{
         String line = "";
         while(true){
             try {
-                if (!((line = reader.readLine()) != null)) break;
+                if ((line = reader.readLine()) == null) break;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -79,23 +63,24 @@ public class Fuzz extends Thread{
         }
     }
 
-    void subdomainScan(){
-        HttpRequest request = null;
-        try {
-            request = new HttpRequest(Url);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    void subdomainScan() throws IOException {
+        HttpRequest request = new HttpRequest(Url);
 
         String line = "";
         while(true){
             try {
-                if (!((line = reader.readLine()) != null)) break;
+                if ((line = reader.readLine()) == null) break;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            request.subDomain = line + ".";
+            request.domain = line + ".";
             request.sub();
         }
     }
+
+    /*void commonScan() throws IOException {
+        HttpRequest request = new HttpRequest(Url);
+        request.OPTIONSrequest();
+        request.getAllHeaders();
+    }*/
 }
