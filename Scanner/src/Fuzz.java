@@ -7,6 +7,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 
 import java.io.*;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 
@@ -74,7 +75,11 @@ public class Fuzz {
                 throw new RuntimeException(e);
             }
             request.domain = line + ".";
-            request.sub();
+            try {
+                request.sub();
+            } catch (UnknownHostException e) {
+                System.out.println("** server can't find " + line + ".google.com: NXDOMAIN");
+            }
         }
     }
 

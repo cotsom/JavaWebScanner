@@ -65,6 +65,7 @@ public class HttpRequest {
         httpResponse = httpClient.execute(httpOptions);
         System.out.println("Allowed methods: ");
         System.out.println(httpOptions.getAllowedMethods(httpResponse));
+        httpOptions.releaseConnection();
     }
 
     public void getAllHeaders() throws IOException {
@@ -93,6 +94,7 @@ public class HttpRequest {
         try {
             String server = httpResponse.getFirstHeader("Server").getValue();
             System.out.println("Server - " + server);
+            System.out.println("CVE found: https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=" + server);
         } catch (NullPointerException e) {
             System.out.println("Key 'Server' is not found!");
         }
@@ -107,6 +109,7 @@ public class HttpRequest {
         try {
             String XPB = httpResponse.getFirstHeader("x-powered-by").getValue();
             System.out.println("x-powered-by - " + XPB);
+            System.out.println("CVE found: https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=" + XPB);
         } catch (NullPointerException e) {
             System.out.println("Key 'x-powered-by' is not found!");
         }
@@ -120,9 +123,20 @@ public class HttpRequest {
 
 
         System.out.println("\n Done");
+        httpGet.releaseConnection();
 
         /*String body = EntityUtils.toString(httpResponse.getEntity());
         System.out.println(body);*/
 
+    }
+
+    public String getHtml() throws IOException {
+        finalUrl = "http://" + Url + "/" + directory;
+        httpGet = new HttpGet(finalUrl);
+        httpResponse = httpClient.execute(httpGet);
+        String body = EntityUtils.toString(httpResponse.getEntity());
+        httpGet.releaseConnection();
+
+        return body;
     }
 }

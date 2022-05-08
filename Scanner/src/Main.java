@@ -18,7 +18,7 @@ public class Main {
         String mode = console.nextLine();
 
         if (mode.equals("fuzz")) {
-            fuzz.settings("localhost:8080");
+            fuzz.settings("google.com");
             if (fuzz.mode.equals("dir")) {
                 fuzz.dirScan();
             } else if (fuzz.mode.equals("subdomain")) {
