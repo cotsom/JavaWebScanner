@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         Fuzz fuzz = new Fuzz();
-        CommonScan common = new CommonScan("localhost:8080");
+        CommonScan common = new CommonScan("google.com");
         Scanner console = new Scanner(System.in);
 
         System.out.println("Choose mode: fuzz, common");

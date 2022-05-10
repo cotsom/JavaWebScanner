@@ -14,13 +14,14 @@ public class CommonScan {
 
         request.directory = dirPayload;
         page404Html = request.getHtml();
-        System.out.println(page404Html);
+        //System.out.println(page404Html);
         if (page404Html.contains(dirPayload)){
             System.out.println("404 page contains user input");
 
-            dirPayload = "pl\"pl<pl>pl'";
+            dirPayload = "pl%22pl%3Cpl%3Epl'";
             request.directory = dirPayload;
             page404Html = request.getHtml();
+            //System.out.println(page404Html);
 
             if (page404Html.contains("pl\"") || page404Html.contains("pl<") || page404Html.contains("pl>")  || page404Html.contains("pl'")){
                 System.out.println("Possible XSS!");
@@ -28,7 +29,7 @@ public class CommonScan {
                 System.out.println("XSS doesn't seem possible");
             }
 
-            dirPayload = "{{7*7}}";
+            dirPayload = "%7B%7B7*7%7D%7D";
             request.directory = dirPayload;
             page404Html = request.getHtml();
 

@@ -121,6 +121,13 @@ public class HttpRequest {
             System.out.println("Key 'x-backend-server' is not found!");
         }
 
+        try {
+            String XFO = httpResponse.getFirstHeader("X-Frame-Options").getValue();
+            System.out.println("X-Frame-Options - " + XFO);
+        } catch (NullPointerException e) {
+            System.out.println("The anti-clickjacking X-Frame-Options header is not present");
+        }
+
 
         System.out.println("\n Done");
         httpGet.releaseConnection();
