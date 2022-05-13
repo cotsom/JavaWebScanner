@@ -26,6 +26,7 @@ public class HttpRequest {
     String Url;
     String finalUrl;
     String directory;
+    String parameter;
     String domain;
     Scanner console = new Scanner(System.in);
     String userAnswer;
@@ -146,4 +147,16 @@ public class HttpRequest {
 
         return body;
     }
+
+    public String requestParam() throws IOException {
+        finalUrl ="http://" + Url.replace("payload", parameter);
+        //System.out.println(finalUrl);
+        httpGet = new HttpGet(finalUrl);
+        httpResponse = httpClient.execute(httpGet);
+        String body = EntityUtils.toString(httpResponse.getEntity());
+        httpGet.releaseConnection();
+
+        return body;
+    }
+
 }

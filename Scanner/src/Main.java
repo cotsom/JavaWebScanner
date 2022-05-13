@@ -12,14 +12,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Fuzz fuzz = new Fuzz();
         CommonScan common = new CommonScan("localhost:8080");
-        XssScan xssScan = new XssScan("fourtreasures.ru/search/?query=");
+        XssScan xssScan = new XssScan();
         Scanner console = new Scanner(System.in);
 
         System.out.println("Choose mode: fuzz, common, xss");
         String mode = console.nextLine();
 
         if (mode.equals("fuzz")) {
-            fuzz.settings("localhost:8080/portal");
+            fuzz.settings("localhost:8080/");
             if (fuzz.mode.equals("dir")) {
                 fuzz.dirScan();
             } else if (fuzz.mode.equals("subdomain")) {
@@ -28,6 +28,7 @@ public class Main {
         } else if (mode.equals("common")) {
             common.commonScan();
         } else if (mode.equals("xss")) {
+            xssScan.settings();
             xssScan.XssScan();
         }
 
