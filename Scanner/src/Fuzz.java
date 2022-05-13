@@ -59,7 +59,7 @@ public class Fuzz {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            request.directory = "/" + line;
+            request.directory = line;
             request.dir();
         }
     }
@@ -74,7 +74,7 @@ public class Fuzz {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            request.domain = line + ".";
+            request.domain = line;
             try {
                 request.sub();
             } catch (UnknownHostException e) {

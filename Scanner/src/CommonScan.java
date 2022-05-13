@@ -11,6 +11,8 @@ public class CommonScan {
         HttpRequest request = new HttpRequest(Url);
         request.OPTIONSrequest();
         request.getAllHeaders();
+        request.directory = "robots.txt";
+        request.dir();
 
         request.directory = dirPayload;
         page404Html = request.getHtml();
@@ -42,6 +44,5 @@ public class CommonScan {
         }else {
             System.out.println("404 page doesn't contains user input");
         }
-
     }
 }

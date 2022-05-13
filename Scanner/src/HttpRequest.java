@@ -31,7 +31,7 @@ public class HttpRequest {
     String userAnswer;
 
     public void dir() throws IOException {
-        finalUrl = "http://" + Url + directory;
+        finalUrl = "http://" + Url + "/" + directory;
         httpGet = new HttpGet(finalUrl);
         System.out.println(finalUrl);
         httpResponse = httpClient.execute(httpGet);
@@ -45,7 +45,7 @@ public class HttpRequest {
     }
 
     public void sub() throws IOException {
-        finalUrl = "http://" + domain + Url;
+        finalUrl = "http://" + domain + "." + Url;
         System.out.println(finalUrl);
         httpGet = new HttpGet(finalUrl);
         httpResponse = httpClient.execute(httpGet);
