@@ -1,0 +1,45 @@
+
+c	java:S116"NRename this field "Url" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(⁄Ç—í
+ë
+java:S1130"{Remove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from constructor's body.(ôùÊß
+X	java:S125%"<This block of commented-out lines of code should be removed.(≠∏«è8‹ÜÛ˚ã0
+X	java:S125,"<This block of commented-out lines of code should be removed.(≠≈ù≥8ø«Ëöé0
+S	java:S1062"9Replace this use of System.out or System.err by a logger.(˝Åﬁ¡˝ˇˇˇˇ
+S	java:S106:"9Replace this use of System.out or System.err by a logger.(¥⁄ÔØ˛ˇˇˇˇ
+c	java:S100?"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç≥∞∑
+N	java:S106C"9Replace this use of System.out or System.err by a logger.(ÉÈÛÊ
+N	java:S106D"9Replace this use of System.out or System.err by a logger.(˙´≤Æ
+S	java:S106L"9Replace this use of System.out or System.err by a logger.(˚ìÄ¿˚ˇˇˇˇ
+M	java:S106P"9Replace this use of System.out or System.err by a logger.(ö†‹
+
+N	java:S106T"9Replace this use of System.out or System.err by a logger.(”©˘•
+S	java:S106Z"9Replace this use of System.out or System.err by a logger.(ÈØß·˙ˇˇˇˇ
+S	java:S106_"9Replace this use of System.out or System.err by a logger.(ÖƒÆÛ˙ˇˇˇˇ
+N	java:S106`"9Replace this use of System.out or System.err by a logger.(ØÀã”
+N	java:S106b"9Replace this use of System.out or System.err by a logger.(Îù˚Œ
+S	java:S106g"9Replace this use of System.out or System.err by a logger.(›•Â»˘ˇˇˇˇ
+S	java:S106i"9Replace this use of System.out or System.err by a logger.(¶úóïˇˇˇˇˇ
+S	java:S106n"9Replace this use of System.out or System.err by a logger.(…ÿ∑Ã¸ˇˇˇˇ
+N	java:S106o"9Replace this use of System.out or System.err by a logger.(©⁄∞«
+N	java:S106q"9Replace this use of System.out or System.err by a logger.(¬¢‰≈
+N	java:S106v"9Replace this use of System.out or System.err by a logger.(»∂èŒ
+N	java:S106x"9Replace this use of System.out or System.err by a logger.(¨À≠—
+S	java:S106}"9Replace this use of System.out or System.err by a logger.(Ú¯∂¡˝ˇˇˇˇ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(µ˙‚„
+O	java:S106É"9Replace this use of System.out or System.err by a logger.(Îﬂø©
+W	java:S125Ü"<This block of commented-out lines of code should be removed.(˜€˜˙ˇˇˇˇˇ
+Y	java:S125ó"<This block of commented-out lines of code should be removed.(≠∏«è8‡÷Íöé0
+b
+java:S1128"GRemove this unused import 'org.apache.http.client.params.ClientPNames'.(˘·Ì”˛ˇˇˇˇ
+Z
+java:S1128"DRemove this unused import 'org.apache.http.impl.client.HttpClients'.(ßπ¯ˇ
+g
+java:S1128	"LRemove this unused import 'org.apache.http.impl.client.LaxRedirectStrategy'.(˜®§œˇˇˇˇˇ
+D
+java:S1128")Remove this unused import 'java.net.URL'.(ÒÏ¡Ñ¸ˇˇˇˇ
+c
+java:S1192#"HDefine a constant instead of duplicating this literal "http://" 6 times.(•ÁŒ¸˙ˇˇˇˇ
+f	java:S117f"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆ©⁄„
+f	java:S117m"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°›«§
+f	java:S117u"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÜÍ∞†
+k	java:S117|"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Üóë˙ˇˇˇˇ

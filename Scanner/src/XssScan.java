@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Scanner;
 
 public class XssScan {
@@ -18,8 +19,36 @@ public class XssScan {
     String startPayload = "TestStringPayload";
     String payload = "pl%22pl%3Cpl%3Epl'";
     String page;
+    boolean payloadInAttribute;
     String nonFilterableCharacters = "";
-    String[] xssPatterns = {">)) <script>"}
+    String[] xssTagsPatterns = {">)) pl<script>", "\"\"pl>pl>))))", "\">)) pl<scr<script>ipt>", "pl\"'pl\"pl\"''pl>>pl<< pl<<>pl>", "))\"==pl<pl>pl>pl<"};
+    String[] xssAttributePatterns = {"pl\"", "pl\"\"", "pl'pl\"", "\"pl'pl\"))'"};
+    int pointsForXss = 0;
+
+    void check(String htmlPage){
+        if (htmlPage.contains("pl\"")){
+            if (!nonFilterableCharacters.contains("\"")) {
+                nonFilterableCharacters += "\" ";
+            }
+        }
+        if (htmlPage.contains("pl<")) {
+            if (!nonFilterableCharacters.contains("<")) {
+                nonFilterableCharacters += "< ";
+            }
+            pointsForXss++;
+        }
+        if (htmlPage.contains("pl>")) {
+            if (!nonFilterableCharacters.contains(">")) {
+                nonFilterableCharacters += "> ";
+            }
+            pointsForXss++;
+        }
+        if (htmlPage.contains("pl'")) {
+            if (!nonFilterableCharacters.contains("'")) {
+                nonFilterableCharacters += "' ";
+            }
+        }
+    }
 
     void XssScan() throws IOException {
         HttpRequest request = new HttpRequest(Url);
@@ -27,22 +56,45 @@ public class XssScan {
         page = request.requestParam();
 
         if (page.contains(startPayload)){
+            //Check contains attribute user's input
+            if (page.contains("\""+startPayload+"\"")){
+                payloadInAttribute = true;
+            }
+
+            //Common xss scan
             request.parameter = payload;
             page = request.requestParam();
-            //System.out.println(page);
-            if (page.contains("pl\"")){
-                nonFilterableCharacters += "\" ";
-            }
-            if (page.contains("pl<")) {
-                nonFilterableCharacters += "< ";
-            }
-            if (page.contains("pl>")) {
-                nonFilterableCharacters += "> ";
-            }
-            if (page.contains("pl'")) {
-                nonFilterableCharacters += "' ";
-            }
+            check(page);
             System.out.println("the following characters are not filtered at first glance: " + nonFilterableCharacters);
+            nonFilterableCharacters = "";
+
+            if (pointsForXss >= 2){
+                System.out.println("You can embed tags!");
+                pointsForXss = 0;
+            }
+
+            //Searching xss in attributes
+            if (payloadInAttribute){
+                for (String payload : xssAttributePatterns) {
+                    request.parameter = URLEncoder.encode(payload, "UTF-8");
+                    page = request.requestParam();
+                    check(page);
+                }
+                System.out.println("Scanning attribute revealed that the following characters are not filtered in attribute: " + nonFilterableCharacters);
+                nonFilterableCharacters = "";
+            }
+
+            //Searching xss with tags
+            for (String payload : xssTagsPatterns) {
+                request.parameter = URLEncoder.encode(payload, "UTF-8");
+                page = request.requestParam();
+                check(page);
+                if (page.contains("pl<script>")){
+                    System.out.println("managed to implement tag \"<script>\", XSS possible!");
+                }
+            }
+            System.out.println("Scanning with tags revealed that the following characters are not filtered: " + nonFilterableCharacters);
+            nonFilterableCharacters = "";
 
         }else {
             System.out.println("something went wrong and the DOM does not contain user input.\n" +

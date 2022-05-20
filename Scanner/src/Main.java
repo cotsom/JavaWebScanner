@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         Fuzz fuzz = new Fuzz();
-        CommonScan common = new CommonScan("localhost:8080");
+        CommonScan common = new CommonScan("fourtreasures.ru");
         XssScan xssScan = new XssScan();
         Scanner console = new Scanner(System.in);
 
@@ -19,7 +19,7 @@ public class Main {
         String mode = console.nextLine();
 
         if (mode.equals("fuzz")) {
-            fuzz.settings("localhost:8080/");
+            fuzz.settings("fourtreasures.ru");
             if (fuzz.mode.equals("dir")) {
                 fuzz.dirScan();
             } else if (fuzz.mode.equals("subdomain")) {

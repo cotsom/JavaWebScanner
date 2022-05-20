@@ -61,6 +61,9 @@ public class Fuzz {
             }
             request.directory = line;
             request.dir();
+            if (!request.response.equals("HTTP/1.1 404 Not Found")){
+                System.out.println(request.finalUrl);
+            }
         }
     }
 
@@ -78,14 +81,8 @@ public class Fuzz {
             try {
                 request.sub();
             } catch (UnknownHostException e) {
-                System.out.println("** server can't find " + line + ".google.com: NXDOMAIN");
+                System.out.println("** server can't find " + line + "." + Url + ": NXDOMAIN");
             }
         }
     }
-
-    /*void commonScan() throws IOException {
-        HttpRequest request = new HttpRequest(Url);
-        request.OPTIONSrequest();
-        request.getAllHeaders();
-    }*/
 }

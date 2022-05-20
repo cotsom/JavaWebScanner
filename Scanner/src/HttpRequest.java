@@ -34,14 +34,14 @@ public class HttpRequest {
     public void dir() throws IOException {
         finalUrl = "http://" + Url + "/" + directory;
         httpGet = new HttpGet(finalUrl);
-        System.out.println(finalUrl);
+        //System.out.println(finalUrl);
         httpResponse = httpClient.execute(httpGet);
         if (httpResponse == null){
             response = "HTTP/1.1 404 Not Found";
         }else {
             response = String.valueOf(httpResponse.getStatusLine());
         }
-        System.out.println("response: "+response);
+        //System.out.println("response: "+response);
         httpGet.releaseConnection();
     }
 
@@ -81,12 +81,10 @@ public class HttpRequest {
 
             Header[] headers = httpResponse.getAllHeaders();
             for (Header header : headers) {
-                System.out.println("Key : " + header.getName()
-                        + " ,Value : " + header.getValue());
+                System.out.println(header.getName()
+                        + " : " + header.getValue());
 
             }
-
-            System.out.println("\nGet Response Header By Key ...\n");
         }
 
         System.out.println("Important and interesting headers:");
