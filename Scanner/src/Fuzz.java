@@ -19,8 +19,13 @@ public class Fuzz {
     File wordlistFile;
     //создаем объект FileReader для объекта File
     FileReader fr;
+    //FileReader startFr;
     //создаем BufferedReader с существующего FileReader для построчного считывания
     BufferedReader reader;
+    //BufferedReader startReader;
+    //Кол-во строк в файле
+    //int totalLines = 0;
+    //int linesNow = 0;
 
     void settings(String url) throws IOException {
         System.out.println("Выберите режим сканирования:\ndir\nsubdomain");
@@ -38,7 +43,11 @@ public class Fuzz {
             return;
         }
         fr = new FileReader(wordlistFile);
+        //startFr = new FileReader(wordlistFile);
+        //startReader = new BufferedReader(startFr);
         reader = new BufferedReader(fr);
+        //Count number of lines
+        //while (startReader.readLine() != null) totalLines++;
 
     }
 
@@ -51,9 +60,10 @@ public class Fuzz {
         //if (response.equals("HTTP/1.1 200 OK")){
         //    System.out.println("OK!");
         //}
-
+        System.out.println("Searching directories...");
         String line = "";
         while(true){
+            //System.out.println(linesNow + "/" + totalLines);
             try {
                 if ((line = reader.readLine()) == null) break;
             } catch (IOException e) {
@@ -64,6 +74,7 @@ public class Fuzz {
             if (!request.response.equals("HTTP/1.1 404 Not Found")){
                 System.out.println(request.finalUrl);
             }
+            //linesNow++;
         }
     }
 

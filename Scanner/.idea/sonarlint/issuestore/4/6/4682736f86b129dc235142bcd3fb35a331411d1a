@@ -1,27 +1,0 @@
-
-c	java:S116"NRename this field "Url" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú‚Ñ’
-1
-java:S3626"Remove this redundant jump.(ûÁİ…
-N	java:S106"9Replace this use of System.out or System.err by a logger.(ÁÎ ¬
-S	java:S106"9Replace this use of System.out or System.err by a logger.(ÜçåÀùÿÿÿÿ
-c	java:S1005"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒôÒº
-h
-java:S37765"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ƒôÒº
-N	java:S106D"9Replace this use of System.out or System.err by a logger.(¶˜»Û
-N	java:S106H"9Replace this use of System.out or System.err by a logger.(ÆÖÙÈ
-V
-java:S1117N";Rename "payload" which hides the field declared at line 20.(Å³æŒÿÿÿÿÿ
-M	java:S106S"9Replace this use of System.out or System.err by a logger.(³¦Ü
-Q
-java:S1117X";Rename "payload" which hides the field declared at line 20.(¾Ô´­
-S	java:S106]"9Replace this use of System.out or System.err by a logger.(Ò¼Å×øÿÿÿÿ
-S	java:S106`"9Replace this use of System.out or System.err by a logger.(şîãÆıÿÿÿÿ
-N	java:S106d"9Replace this use of System.out or System.err by a logger.(…£Ã
-U
-java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ
-E
-java:S1066"/Merge this if statement with the enclosing one.(¸üò½
-L
-java:S1066/"/Merge this if statement with the enclosing one.(ÔŠó8ºµ¶š0
-b
-java:S12235"LRename this method to prevent any misunderstanding or make it a constructor.(ƒôÒº
